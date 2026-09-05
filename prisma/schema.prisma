@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Merchant {
+  id                String         @id @default(uuid())
+  name              String
+  razorpayKeyId     String
+  razorpayKeySecret String
+  guardrailConfig   String         @default("{}")
+  createdAt         DateTime       @default(now())
+  events            RevenueEvent[]
+}
+
+model RevenueEvent {
+  id            String         @id @default(uuid())
+  merchantId    String
+  type          String         // payment_failed, mandate_failed, abandoned, receivable_overdue
+  amount        Int            // in paise
+  currency      String         @default("INR")
+  razorpayRefId String?
+  customerId    String?
+  customerEmail String?
+  customerPhone String?
+  rawError      String?        // JSON stored as string for SQLite
+  status        String         @default("detected")
+  // detected, diagnosed, action_proposed, executing, recovered, stopped, escalated
+  detectedAt    DateTime       @default(now())
+  resolvedAt    DateTime?
+  merchant      Merchant       @relation(fields: [merchantId], references: [id])
+  rootCause     RootCause?
+  interventions Intervention[]
+  auditEntries  AuditEntry[]
+}
+
+model RootCause {
+  id           String       @id @default(uuid())
+  eventId      String       @unique
+  category     String       // transient_bank, auth_failed, insufficient_funds, abandoned, mandate_retry, etc.
+  confidence   Float
+  ruleFired    String
+  proposedAction String     // send_payment_link, auto_retry, timed_nudge, compliant_retry, escalate
+  classifiedAt DateTime     @default(now())
+  event        RevenueEvent @relation(fields: [eventId], references: [id])
+}
+
+model Intervention {
+  id              String       @id @default(uuid())
+  eventId         String
+  proposedAction  String       // send_payment_link, retry_mandate, notify_customer, escalate_human
+  channel         String?      // sms, email, whatsapp
+  requiresHuman   Boolean      @default(false)
+  guardrailResult String?      // JSON stored as string
+  decidedAt       DateTime     @default(now())
+  event           RevenueEvent @relation(fields: [eventId], references: [id])
+  actions         Action[]
+}
+
+model Action {
+  id             String       @id @default(uuid())
+  interventionId String
+  mcpToolCalled  String
+  payload        String       // JSON stored as string
+  result         String?      // success, failed, blocked
+  resultData     String?      // JSON of API response
+  executedAt     DateTime     @default(now())
+  intervention   Intervention @relation(fields: [interventionId], references: [id])
+}
+
+model AuditEntry {
+  id         String       @id @default(uuid())
+  eventId    String
+  actor      String       // agent, human, system, guardrail
+  decision   String
+  reason     String
+  prevHash   String
+  hash       String
+  createdAt  DateTime     @default(now())
+  event      RevenueEvent @relation(fields: [eventId], references: [id])
+}

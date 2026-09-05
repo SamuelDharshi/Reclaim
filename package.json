@@ -1,0 +1,54 @@
+{
+  "name": "reclaim",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "db:seed": "ts-node prisma/seed.ts",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch --runInBand",
+    "test:coverage": "jest --coverage --runInBand"
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
+  "dependencies": {
+    "@prisma/client": "^5.17.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "framer-motion": "^11.3.19",
+    "lucide-react": "^0.416.0",
+    "next": "14.2.5",
+    "node-fetch": "^3.3.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "recharts": "^2.12.7",
+    "tailwind-merge": "^2.4.0",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "dotenv": "^17.4.2",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "jest": "^30.5.1",
+    "postcss": "^8",
+    "prisma": "^5.17.0",
+    "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.4.12",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}

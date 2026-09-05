@@ -1,0 +1,25 @@
+# Reclaim
+
+node_modules
+.next
+out
+build
+dist-test
+coverage
+*.db
+*.db-journal
+.env
+.env.local
+.env*.local
+package-lock.json
+
+# typescript / next.js generated
+*.tsbuildinfo
+next-env.d.ts
+
+# vercel
+.vercel
+
+# OS
+.DS_Store
+Thumbs.db

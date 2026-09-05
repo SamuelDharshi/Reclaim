@@ -216,8 +216,8 @@ DATABASE_URL="file:./dev.db"
 Create `.env.local` in the root directory:
 ```ini
 DATABASE_URL="file:./dev.db"
-RAZORPAY_KEY_ID="rzp_test_TYDYtZ2Mw50n0Q"
-RAZORPAY_KEY_SECRET="qJQ4ZIk5njykyoRfOeS5Pf1x"
+RAZORPAY_KEY_ID="rzp_test_your_key_id"
+RAZORPAY_KEY_SECRET="your_key_secret"
 RAZORPAY_WEBHOOK_SECRET="test_webhook_secret"
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```

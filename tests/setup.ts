@@ -10,8 +10,8 @@
 // ── Must be set BEFORE any @/lib/prisma import ──
 process.env.DATABASE_URL = 'file:./test.db'
 process.env.RAZORPAY_WEBHOOK_SECRET = process.env.RAZORPAY_WEBHOOK_SECRET ?? 'test_webhook_secret'
-process.env.RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID ?? 'rzp_test_TYDYtZ2Mw50n0Q'
-process.env.RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET ?? 'qJQ4ZIk5njykyoRfOeS5Pf1x'
+process.env.RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID ?? 'rzp_test_dummy_key_id'
+process.env.RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET ?? 'dummy_key_secret'
 process.env.SKIP_RATE_LIMIT_DELAY = 'true'
 // Silence Next.js server-only warnings in test environment
 process.env.NEXT_PUBLIC_APP_URL = 'http://localhost:3000'

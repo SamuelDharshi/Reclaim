@@ -202,31 +202,6 @@ npm install
 
 ---
 
-### Step 2: Configure Environment Variables
-
-Reclaim uses two environment files:
-1. `.env` — Read by Prisma CLI for local SQLite database connections.
-2. `.env.local` — Read by Next.js server at runtime for Razorpay API keys and secrets.
-
-Create `.env` in the root directory:
-```ini
-DATABASE_URL="file:./dev.db"
-```
-
-Create `.env.local` in the root directory:
-```ini
-DATABASE_URL="file:./dev.db"
-RAZORPAY_KEY_ID="rzp_test_your_key_id"
-RAZORPAY_KEY_SECRET="your_key_secret"
-RAZORPAY_WEBHOOK_SECRET="test_webhook_secret"
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
-```
-
-> [!IMPORTANT]
-> Never commit `.env.local` to Git. It is already added to `.gitignore`.
-
----
-
 ### Step 3: Initialize Database & Run Seed Script
 
 Generate Prisma client, deploy SQLite migrations, and seed mock data:

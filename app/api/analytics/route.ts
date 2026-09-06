@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 const EVENT_TYPES = ['payment_failed', 'mandate_failed', 'abandoned', 'receivable_overdue'] as const
 
 const TYPE_LABELS: Record<string, string> = {
